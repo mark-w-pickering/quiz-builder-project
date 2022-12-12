@@ -1,0 +1,78 @@
+<form [formGroup]="quizFormData">
+  <h2>Settings</h2>
+  <div class="setting">
+    <label for="name">Quiz Name: </label>
+    <input id="name" type="text" formControlName="name">
+  </div>
+  <div class="setting">
+    <label for="backgroundColour">Background colour: </label>
+    <input id="backgroundColour" type="color" formControlName="backgroundColour">
+  </div>
+
+  <div class="setting">
+    <p>Show answers...</p>
+    <div class="radio-option">
+      <label>
+        <input type="radio" value="each" formControlName="showAnswers">
+        <span>After each round</span>
+    </label>
+    </div>
+    <div class="radio-option">
+      <label>
+        <input type="radio" value="after3" formControlName="showAnswers">
+        <span>After every 3 rounds</span>
+      </label>
+    </div>
+    <div class="radio-option">
+      <label>
+        <input type="radio" value="end" formControlName="showAnswers">
+        <span>After all rounds</span>
+      </label>
+    </div>
+  </div>
+
+  <h2>NAME: {{ quiz.name }}</h2>
+
+  <div>
+    <button class="btn btn-danger" (click)='addRound()'>Add Round</button>
+  </div>
+
+  <div formArrayName="rounds" *ngFor="let r of rounds().controls; let roundIndex = index">
+    <div [formGroupName]="roundIndex">
+      <table>
+        <tr>
+          <th>No.</th><th>Round name</th>
+        </tr>
+        <tr>
+          <td><input formControlName='number' id="{{'number' + roundIndex}}" type="number" placeholder="Enter round number" (change)="saveToLocal()"></td>
+          <td><input formControlName='name' id="{{'name' + roundIndex}}" type="text" placeholder="Enter round name" (change)="saveToLocal()"></td>
+        </tr>
+      </table>
+
+      <details>
+        <summary>Questions</summary>
+        <div>
+          <button (click)='addQuestion(roundIndex)'>Add Question</button>
+        </div>
+        <div style="padding: 0.25rem 0" formArrayName="questions">
+          <table>
+            <tr>
+              <th>No.</th><th>Question</th><th>Answer</th><th>Select image (if required)</th>
+            </tr>
+            <tr *ngFor="let q of roundQuestions(roundIndex).controls; let questionIndex = index" [formGroupName]="questionIndex">
+              <td><input formControlName='number' id="{{'round' + roundIndex + 'number' + questionIndex}}" type="number" placeholder="Enter question number" (change)="saveToLocal()"></td>
+              <td><input formControlName='question' id="{{'round' + roundIndex + 'question' + questionIndex}}" type="text" placeholder="Enter question" (change)="saveToLocal()"></td>
+              <td><input formControlName='answer' id="{{'round' + roundIndex + 'answer' + questionIndex}}" type="text" placeholder="Enter answer" (change)="saveToLocal()"></td>
+           	  <td><input formControlName='image' id="{{'round' + roundIndex + 'image' + questionIndex}}" type="hidden">
+           	  <label for="{{'round' + roundIndex + 'imagepicker' + questionIndex}}">Select image</label>
+	            <input id="{{'round' + roundIndex + 'imagepicker' + questionIndex}}" type="file" accept="image/*" (change)="onFileChange($event, roundIndex, questionIndex)" style="visibility: hidden; width: 1px">
+              <img *ngIf="this.roundQuestions(roundIndex).value[questionIndex].image" src="{{ this.roundQuestions(roundIndex).value[questionIndex].image }}" width="100">
+              </td>
+            </tr>
+          </table>
+        </div>
+      </details>
+    </div>
+  </div>
+
+</form>

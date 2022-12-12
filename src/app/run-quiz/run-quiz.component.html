@@ -1,0 +1,14 @@
+<div id="quiz-container">
+  <input id="hidden-element"
+      (keyup.ArrowLeft)="changeCurrentSlide(-1)"
+      (keyup.ArrowRight)="changeCurrentSlide(1)"
+      (keyup.esc)="navigateToHome()"
+      (blur)="trapFocus()">
+  <div id="header">{{ currentSlide.header }}</div>
+  <div id="main-content">
+    <div id="question">{{ currentSlide.question }}</div>
+    <div id="image-container" *ngIf="this.currentSlide.image" style="background-image: url({{ currentSlide.image}})">
+    </div>
+    <div id="answer">{{ currentSlide.answer }}</div>
+  </div>
+</div>

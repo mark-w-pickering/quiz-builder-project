@@ -1,0 +1,91 @@
+FORM {
+  margin: 20px;
+
+  font-family: arial;
+
+  .setting {
+    margin-bottom: 0.25rem;
+  }
+  .radio-option {
+    display: inline-block;
+    padding-right: 2rem;
+  }
+
+
+  DETAILS {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 1rem 0 1rem 0.5rem;
+  }
+
+  TH {
+    text-align: left;
+  }
+
+  TD {
+    vertical-align: top;
+
+    > LABEL {
+      display:inline-block;
+      font-size: 1rem;
+      font-weight: normal;
+      background-color: #EEE;
+      border: #999 2px solid;
+      border-radius: 10px;
+      padding: 6px;
+    }
+
+    > IMG {
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+
+  INPUT {
+    font-size: 1rem;
+    background-color: #F9F9F9;
+    border: #999 1px solid;
+    border-radius: 5px;
+    padding: 6px;
+
+    &[type="color"] {
+      padding: 0;
+    }
+
+    &[type="radio"] {
+      transform: scale(1.5);
+      vertical-align: top;
+    }
+
+    &[type="number"] {
+      width: 3rem;
+    }
+
+    &[formcontrolname="question"] {
+      width: 32vw;
+    }
+
+    &[formcontrolname="answer"] {
+      width: 24vw;
+    }
+  }
+
+  LABEL > SPAN {
+    padding-left: 0.5rem;
+  }
+
+  BUTTON {
+    font-size: 1rem;
+    background-color: #EEE;
+    border: #999 2px solid;
+    border-radius: 10px;
+    padding: 6px;
+  }
+
+  [formArrayName="rounds"] {
+    border: #999 2px solid;
+    border-radius: 10px;
+    margin: 1rem 0;
+    padding: 1rem;
+  }
+}
