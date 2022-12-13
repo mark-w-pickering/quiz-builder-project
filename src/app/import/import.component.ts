@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+
 
 @Component({
   selector: 'app-import',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImportComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -21,7 +23,11 @@ export class ImportComponent implements OnInit {
         const uploadedFile = reader.result as string;
 
         if (uploadedFile) {
-           localStorage.setItem('quizData', uploadedFile);
+          // Save to local storage
+          localStorage.setItem('quizData', uploadedFile);
+
+          // Navigate to main Quiz Builder Page
+          this.router.navigate(['/quiz-builder']);
         }
       });
 

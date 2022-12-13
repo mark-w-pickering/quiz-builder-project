@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -11,7 +12,7 @@ export class ExportComponent implements OnInit {
   exportData: FormGroup;
   localData: any;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.exportData = this.fb.group({
@@ -43,6 +44,8 @@ export class ExportComponent implements OnInit {
     tempA.click();
     document.body.removeChild(tempA);
 
+    // Navigate to main Quiz Builder Page
+    this.router.navigate(['/quiz-builder']);
   }
 
 }

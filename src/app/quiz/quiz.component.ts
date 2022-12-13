@@ -11,6 +11,8 @@ export class QuizComponent implements OnInit {
   quizFormData: FormGroup;
   quiz:Quiz = { name: '', backgroundColour: '', showAnswers: '', rounds: [] };
   fileToUpload: File | null = null;
+  deleteRoundIndex: number;
+  deleteQuestionIndex: number;
 
   constructor(private fb: FormBuilder) { }
 
@@ -114,6 +116,22 @@ export class QuizComponent implements OnInit {
 
   }
 
+  showDeleteQuizDialog() {
+    const deleteQuizDialog = document.getElementById('deleteQuizDialog') as HTMLDialogElement;
+    deleteQuizDialog.showModal();
+    return false;
+  }
+
+  clearQuizData() {
+    this.quiz = { name: '', backgroundColour: '', showAnswers: '', rounds: [] };
+    this.quizFormData = this.fb.group({
+      name: [null],
+      backgroundColour: [null],
+      showAnswers: [null],
+      rounds: this.fb.array([])
+    });
+    this.saveToLocal();
+  }
 
 
   rounds(): FormArray {
@@ -132,10 +150,17 @@ export class QuizComponent implements OnInit {
     this.rounds().push(this.createRound());
   }
 
-  removeRound(roundIndex:number) {
-    this.rounds().removeAt(roundIndex);
+  removeRound() {
+    this.rounds().removeAt(this.deleteRoundIndex);
+    this.saveToLocal();
   }
 
+  showDeleteRoundDialog(roundIndex:number) {
+    this.deleteRoundIndex = roundIndex;
+    const deleteRoundDialog = document.getElementById('deleteRoundDialog') as HTMLDialogElement;
+    deleteRoundDialog.showModal();
+    return false;
+  }
 
 
   roundQuestions(roundIndex:number) : FormArray {
@@ -156,6 +181,18 @@ export class QuizComponent implements OnInit {
     this.roundQuestions(roundIndex).push(this.createQuestion());
   }
 
+  removeQuestion() {
+    this.roundQuestions(this.deleteRoundIndex).removeAt(this.deleteQuestionIndex);
+    this.saveToLocal();
+  }
+
+  showDeleteQuestionDialog(roundIndex:number, questionIndex:number) {
+    this.deleteRoundIndex = roundIndex;
+    this.deleteQuestionIndex = questionIndex;
+    const deleteQuestionDialog = document.getElementById('deleteQuestionDialog') as HTMLDialogElement;
+    deleteQuestionDialog.showModal();
+    return false;
+  }
 
 
   onFileChange(event: any, roundIndex: any, questionIndex: any) {
@@ -192,7 +229,6 @@ export class QuizComponent implements OnInit {
     this.quiz.rounds = this.quizFormData.value.rounds;
 
     localStorage.setItem('quizData', JSON.stringify(this.quiz));
-    console.log(this.quiz);
   }
 
 }

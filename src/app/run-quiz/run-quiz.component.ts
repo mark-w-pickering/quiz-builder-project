@@ -11,7 +11,9 @@ export class RunQuizComponent implements OnInit {
   slides: Slide[] = [];
 
   currentSlideIndex: number = 0;
-  currentSlide: Slide;
+  currentSlide: Slide = {
+    header: ''
+  };
 
   constructor() { }
 
@@ -64,7 +66,6 @@ export class RunQuizComponent implements OnInit {
                 this.addRound(roundIndex, true);
               }
             }
-
 
           }
 
