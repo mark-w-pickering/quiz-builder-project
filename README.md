@@ -1,4 +1,25 @@
-# QuizBuilderProject
+# Quiz Builder Project
+
+You can use this online tool to create and save your custom built quiz.
+
+You can run the quiz on your browser, ideal if you are using a Video conference tool with screen sharing functionality
+
+When you use the "Run Quiz" option...
+* I suggest you run the browser in full screen mode, typically activate using the F12 key
+* You can use the right and left arrow keys to move forward and back between the slides
+* The escape (ESC) key with return you to this page
+* If this functionality is not working make sure the browser has focus (by clicking in the window) and/or pressing the tab key
+
+All data is stored locally (not using cookies, so nothing is sent to the server).
+  I recommend saving your changes on a regular basis incase you accidentally clear your local browser data
+
+
+
+
+
+
+
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.8.
 
