@@ -1,7 +1,7 @@
 <form [formGroup]="quizFormData">
   <h2>Settings</h2>
   <div id="clearFormContainer">
-     <a href="#" (click)='showDeleteQuizDialog()' title="Clear all quiz data"><i class="gg-trash"></i></a>
+     <a href="#" id="reset-quiz" (click)='showDeleteQuizDialog()' title="Clear all quiz data"><i class="gg-trash"></i></a>
   </div>
   <div class="setting">
     <label for="name">Quiz Name: </label>
@@ -47,9 +47,9 @@
           <th>No.</th><th>Round name</th><th></th>
         </tr>
         <tr>
-          <td><input formControlName='number' id="{{'number' + roundIndex}}" type="number" placeholder="Enter round number" (change)="saveToLocal()"></td>
-          <td><input formControlName='name' id="{{'name' + roundIndex}}" type="text" placeholder="Enter round name" (change)="saveToLocal()"></td>
-          <td><a href="#" (click)='showDeleteRoundDialog(roundIndex)' title="Remove this round"><i class="gg-trash"></i></a></td>
+          <td><input formControlName='number' id="number{{roundIndex}}" type="number" placeholder="Enter round number" (change)="saveToLocal()"></td>
+          <td><input formControlName='name' id="name{{roundIndex}}" type="text" placeholder="Enter round name" (change)="saveToLocal()"></td>
+          <td><a href="#" id="remove-r{{roundIndex}}" (click)='showDeleteRoundDialog(roundIndex)' title="Remove this round"><i class="gg-trash"></i></a></td>
         </tr>
       </table>
 
@@ -64,15 +64,15 @@
               <th>No.</th><th>Question</th><th>Answer</th><th>Select image (if required)</th><th>
             </tr>
             <tr *ngFor="let q of roundQuestions(roundIndex).controls; let questionIndex = index" [formGroupName]="questionIndex">
-              <td><input formControlName='number' id="{{'round' + roundIndex + 'number' + questionIndex}}" type="number" placeholder="Enter question number" (change)="saveToLocal()"></td>
-              <td><input formControlName='question' id="{{'round' + roundIndex + 'question' + questionIndex}}" type="text" placeholder="Enter question" (change)="saveToLocal()"></td>
-              <td><input formControlName='answer' id="{{'round' + roundIndex + 'answer' + questionIndex}}" type="text" placeholder="Enter answer" (change)="saveToLocal()"></td>
-           	  <td><input formControlName='image' id="{{'round' + roundIndex + 'image' + questionIndex}}" type="hidden">
-           	  <label for="{{'round' + roundIndex + 'imagepicker' + questionIndex}}">Select image</label>
-	            <input id="{{'round' + roundIndex + 'imagepicker' + questionIndex}}" type="file" accept="image/*" (change)="onFileChange($event, roundIndex, questionIndex)" style="visibility: hidden; width: 1px">
-              <img *ngIf="this.roundQuestions(roundIndex).value[questionIndex].image" src="{{ this.roundQuestions(roundIndex).value[questionIndex].image }}" width="100">
+              <td><input formControlName='number' id="round{{roundIndex}}number{{questionIndex}}" type="number" placeholder="Enter question number" (change)="saveToLocal()"></td>
+              <td><input formControlName='question' id="round{{roundIndex}}question{{questionIndex}}" type="text" placeholder="Enter question" (change)="saveToLocal()"></td>
+              <td><input formControlName='answer' id="round{{roundIndex}}answer{{questionIndex}}" type="text" placeholder="Enter answer" (change)="saveToLocal()"></td>
+           	  <td><input formControlName='image' id="round{{roundIndex}}image{{questionIndex}}" type="hidden">
+           	    <label for="round{{roundIndex}}imagepicker{{questionIndex}}">Select image</label>
+	              <input id="round{{roundIndex}}imagepicker{{questionIndex}}" type="file" accept="image/*" (change)="onFileChange($event, roundIndex, questionIndex)" style="visibility: hidden; width: 1px">
+                <img *ngIf="this.roundQuestions(roundIndex).value[questionIndex].image" src="{{ this.roundQuestions(roundIndex).value[questionIndex].image }}" width="100">
               </td>
-              <td><a href="#" (click)='showDeleteQuestionDialog(roundIndex, questionIndex)' title="Remove this question"><i class="gg-trash"></i></a></td>
+              <td><a href="#" id="remove-r{{roundIndex}}-q{{questionIndex}}" (click)='showDeleteQuestionDialog(roundIndex, questionIndex)' title="Remove this question"><i class="gg-trash"></i></a></td>
             </tr>
           </table>
         </div>
@@ -86,7 +86,7 @@
   <p>(perhaps you should <a routerLink="/export" routerLinkActive="active">Save Quiz</a> first)</p>
   <form method="dialog">
     <button>No</button> &nbsp;
-    <button (click)='clearQuizData()'>Yes</button>
+    <button id="confirm-reset-quiz"(click)='clearQuizData()'>Yes</button>
   </form>
 </dialog>
 
@@ -94,7 +94,7 @@
   <p>Are you sure you want to delete this round?</p>
   <form method="dialog">
     <button>No</button> &nbsp;
-    <button (click)='removeRound()'>Yes</button>
+    <button id="confirm-remove-round"(click)='removeRound()'>Yes</button>
   </form>
 </dialog>
 
@@ -102,6 +102,6 @@
   <p>Are you sure you want to delete this question?</p>
   <form method="dialog">
     <button>No</button> &nbsp;
-    <button (click)='removeQuestion()'>Yes</button>
+    <button id="confirm-remove-question" (click)='removeQuestion()'>Yes</button>
   </form>
 </dialog>

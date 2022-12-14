@@ -47,7 +47,6 @@ export class RunQuizComponent implements OnInit {
             this.addRound(roundIndex, true);
           }
 
-
           // If showAnswers is set to "after every 3 round3" (value = 'after3') add answers for previous 3 rounds
           if (this.localDataObj.showAnswers === 'after3'){
             if ((roundIndex + 1) % 3 === 0){
@@ -66,21 +65,16 @@ export class RunQuizComponent implements OnInit {
                 this.addRound(roundIndex, true);
               }
             }
-
           }
-
         }
 
         // If showAnswers is set to "after all round" (value = 'end') loop through again.
         if (this.localDataObj.showAnswers === 'end'){
-
           for(let roundIndex=0; roundIndex < this.localDataObj.rounds.length; roundIndex++){
             this.addRound(roundIndex, true);
           }
         }
-
         this.currentSlide = this.slides[this.currentSlideIndex];
-
       }
 
       document?.getElementById("hidden-element")?.focus();
@@ -129,5 +123,4 @@ export class RunQuizComponent implements OnInit {
   navigateToHome() {
     window.location.href = "/";
   }
-
 }

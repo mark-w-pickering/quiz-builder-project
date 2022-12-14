@@ -14,8 +14,12 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    if (window.location.pathname === "/quiz") {
+    if (this.getPathname() === "/quiz") {
       this.showNav = false;
     }
+  }
+
+  getPathname() {
+    return window.location.pathname;
   }
 }

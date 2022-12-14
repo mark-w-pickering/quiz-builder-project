@@ -13,7 +13,7 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent
-      ],
+      ]
     }).compileComponents();
   });
 
@@ -29,10 +29,25 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('quiz-builder-project');
   });
 
-  it('should render title', () => {
+  it('should show nav and render quiz name in H1', () => {
     const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(app.showNav).toEqual(true);
     expect(compiled.querySelector('h1')?.textContent).toContain('Quiz Builder');
+  });
+
+  it(`should hide nav in 'run quiz' mode`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+
+    spyOn(app, 'getPathname').and.returnValue('/quiz');
+
+    fixture.detectChanges();
+
+    expect(app.showNav).toEqual(false);
   });
 });
