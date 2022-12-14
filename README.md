@@ -11,11 +11,8 @@ When you use the "Run Quiz" option...
 * If this functionality is not working make sure the browser has focus (by clicking in the window) and/or pressing the tab key
 
 All data is stored locally (not using cookies, so nothing is sent to the server).
-  I recommend saving your changes on a regular basis incase you accidentally clear your local browser data
 
-
-
-
+I recommend saving your changes on a regular basis incase you accidentally clear your local browser data.
 
 
 
